@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NavesCalc — коммерческое предложение</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --black: #0A0A0A;
+    --dark: #141414;
+    --card: #1A1A1A;
+    --border: #252525;
+    --border-light: #333;
+    --gray-600: #666;
+    --gray-500: #888;
+    --gray-400: #AAA;
+    --gray-300: #CCC;
+    --white: #FAFAFA;
+    --accent: #E07461;
+    --accent-glow: rgba(224, 116, 97, 0.12);
+    --blue: #4A9FD9;
+    --green: #5CB85C;
+    --gold: #D4A43A;
+    --purple: #9B6DFF;
+    --purple-glow: rgba(155, 109, 255, 0.10);
+    --purple-border: rgba(155, 109, 255, 0.20);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 100px 0 80px;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -100px; right: -300px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .from { font-size: 13px; color: var(--gray-500); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 40px; }
+  .from span { color: var(--accent); font-weight: 600; }
+
+  .hero h1 { font-size: 44px; font-weight: 800; line-height: 1.15; letter-spacing: -1.5px; margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub { font-size: 18px; color: var(--gray-400); max-width: 620px; margin-bottom: 48px; }
+
+  .hero-for {
+    padding: 24px 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    display: flex;
+    gap: 32px;
+  }
+  .hero-for-item { display: flex; flex-direction: column; gap: 2px; }
+  .hero-for-label { font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 1px; }
+  .hero-for-value { font-size: 15px; font-weight: 600; }
+
+  .divider { height: 1px; background: var(--border); }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 72px 0; }
+  .label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+  .stitle { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; }
+  .sdesc { font-size: 16px; color: var(--gray-400); max-width: 580px; margin-bottom: 40px; }
+
+  /* ===== FEATURE BLOCKS ===== */
+  .feature-block {
+    margin-bottom: 20px;
+    padding: 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+  .feature-block h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .feature-block h4 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    background: var(--accent-glow);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .feature-block p {
+    font-size: 14px;
+    color: var(--gray-400);
+    line-height: 1.6;
+    margin-left: 36px;
+  }
+  .feature-block .detail {
+    margin-top: 12px;
+    margin-left: 36px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--gray-300);
+    line-height: 1.7;
+  }
+
+  /* ===== STAGE CARD ===== */
+  .stage {
+    padding: 40px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stage::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+  }
+  .stage.s1::before { background: linear-gradient(90deg, var(--accent), #F4A898); }
+  .stage.s2::before { background: linear-gradient(90deg, var(--blue), #7BC4F0); }
+  .stage.s3::before { background: linear-gradient(90deg, var(--green), #8FD88F); }
+
+  .stage-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .stage-badge {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .s1 .stage-badge { background: rgba(224,116,97,0.12); color: var(--accent); }
+  .s2 .stage-badge { background: rgba(74,159,217,0.12); color: var(--blue); }
+  .s3 .stage-badge { background: rgba(92,184,92,0.12); color: var(--green); }
+
+  .stage-price-block { text-align: right; }
+  .stage-price { font-size: 36px; font-weight: 800; letter-spacing: -1px; }
+  .stage-timeline { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
+
+  .stage h3 { font-size: 26px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .stage > .intro { font-size: 15px; color: var(--gray-400); margin-bottom: 28px; max-width: 560px; }
+
+  .stage-value {
+    margin-top: 28px;
+    padding: 18px 22px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .stage-value h5 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-500);
+    margin-bottom: 8px;
+  }
+  .stage-value p {
+    font-size: 14px;
+    color: var(--gray-300);
+    line-height: 1.6;
+  }
+
+  /* ===== PREMIUM BLOCK ===== */
+  .premium-section {
+    margin-top: 48px;
+    padding: 3px;
+    border-radius: 27px;
+    background: linear-gradient(135deg, var(--purple), #6B4DCC, var(--purple));
+    position: relative;
+  }
+  .premium-inner {
+    background: var(--dark);
+    border-radius: 24px;
+    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .premium-inner::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .premium-inner::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .premium-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    background: var(--purple-glow);
+    border: 1px solid var(--purple-border);
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--purple);
+    margin-bottom: 24px;
+  }
+  .premium-badge svg { flex-shrink: 0; }
+  .premium-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .premium-head h3 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .premium-price-block { text-align: right; }
+  .premium-price { font-size: 36px; font-weight: 800; letter-spacing: -1px; color: var(--purple); }
+  .premium-timeline { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
+  .premium-intro {
+    font-size: 15px;
+    color: var(--gray-400);
+    max-width: 580px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+  .premium-optional {
+    display: inline-block;
+    padding: 10px 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed var(--border-light);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-bottom: 32px;
+  }
+  .premium-optional strong { color: var(--gray-300); }
+
+  .premium .feature-block {
+    border-color: var(--purple-border);
+    background: rgba(155, 109, 255, 0.03);
+  }
+  .premium .feature-block h4 .num {
+    background: var(--purple-glow);
+    color: var(--purple);
+  }
+
+  .premium-token-box {
+    margin-top: 28px;
+    padding: 22px 26px;
+    background: rgba(155, 109, 255, 0.04);
+    border: 1px solid var(--purple-border);
+    border-radius: 14px;
+  }
+  .premium-token-box h5 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--purple);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .token-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .token-item {
+    padding: 14px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    text-align: center;
+  }
+  .token-item .t-val { font-size: 22px; font-weight: 800; color: var(--white); }
+  .token-item .t-label { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+  .token-item .t-cost { font-size: 13px; color: var(--purple); font-weight: 600; margin-top: 6px; }
+  .token-note { font-size: 12px; color: var(--gray-500); margin-top: 14px; text-align: center; }
+
+  .premium-stack {
+    margin-top: 24px;
+    padding: 18px 22px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .premium-stack h5 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-500);
+    margin-bottom: 8px;
+  }
+  .premium-stack p {
+    font-size: 13px;
+    color: var(--gray-400);
+    line-height: 1.6;
+  }
+
+  /* ===== TOTAL ===== */
+  .total-box {
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(224,116,97,0.06), rgba(224,116,97,0.02));
+    border: 1px solid rgba(224,116,97,0.15);
+    border-radius: 24px;
+    margin: 20px 0 40px;
+  }
+  .total-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 15px;
+  }
+  .total-line:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .total-line .tl { color: var(--gray-400); }
+  .total-line .tv { font-weight: 600; }
+  .total-line.sum { padding-top: 18px; margin-top: 10px; border-top: 2px solid rgba(224,116,97,0.25) !important; }
+  .total-line.sum .tl { color: var(--white); font-size: 18px; font-weight: 600; }
+  .total-line.sum .tv { font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -1px; }
+  .total-note { text-align: center; margin-top: 16px; font-size: 13px; color: var(--gray-500); }
+
+  /* ===== MARKET TABLE ===== */
+  .mtable { width: 100%; border-collapse: collapse; }
+  .mtable th { text-align: left; padding: 10px 14px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-500); border-bottom: 1px solid var(--border); }
+  .mtable td { padding: 12px 14px; font-size: 13px; color: var(--gray-300); border-bottom: 1px solid var(--border); }
+  .mtable tr:last-child td { border-bottom: none; }
+  .mtable .hl td { background: rgba(224,116,97,0.04); color: var(--white); font-weight: 500; }
+  .mtable .hl td:last-child { color: var(--accent); font-weight: 700; }
+  .src { font-size: 12px; color: var(--gray-600); margin-top: 12px; }
+  .src a { color: var(--gray-500); }
+
+  /* ===== ROI ===== */
+  .roi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .roi-item {
+    padding: 22px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+  .roi-item .big { font-size: 28px; font-weight: 800; color: var(--accent); letter-spacing: -1px; }
+  .roi-item .unit { font-size: 13px; color: var(--gray-500); }
+  .roi-item .exp { font-size: 13px; color: var(--gray-400); margin-top: 6px; line-height: 1.5; }
+
+  /* ===== PROCESS ===== */
+  .steps { display: grid; gap: 2px; }
+  .step-item {
+    display: flex; gap: 20px; padding: 20px 24px;
+    background: var(--card); border-radius: 4px;
+  }
+  .step-item:first-child { border-radius: 14px 14px 4px 4px; }
+  .step-item:last-child { border-radius: 4px 4px 14px 14px; }
+  .step-n { flex-shrink: 0; width: 32px; height: 32px; background: var(--accent-glow); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--accent); }
+  .step-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .step-item p { font-size: 13px; color: var(--gray-400); }
+
+  /* ===== FOOTER ===== */
+  .footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); }
+  .footer-brand { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-500); margin-bottom: 8px; }
+  .footer-brand span { color: var(--accent); }
+  .footer p { font-size: 12px; color: var(--gray-600); }
+
+  @media (max-width: 700px) {
+    .hero h1 { font-size: 32px; }
+    .hero-for { flex-direction: column; gap: 16px; }
+    .stage-head { flex-direction: column; }
+    .roi-grid { grid-template-columns: 1fr; }
+    .stage { padding: 28px; }
+    .stage-price { font-size: 28px; }
+    .total-line.sum .tv { font-size: 26px; }
+    .premium-inner { padding: 28px 22px; }
+    .premium-head { flex-direction: column; }
+    .premium-price { font-size: 28px; }
+    .token-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="from"><span>neovida</span>.ai &mdash; коммерческое предложение</div>
+  <h1>Онлайн-конфигуратор<br>навесов <em>под ключ</em></h1>
+  <p class="hero-sub">
+    Ваш клиент заходит, выбирает параметры — и за 2 минуты видит готовую 3D-модель навеса с размерами, полную смету и скачивает коммерческое предложение в PDF. Без звонков, без ожидания.
+  </p>
+  <div class="hero-for">
+    <div class="hero-for-item">
+      <span class="hero-for-label">Что это</span>
+      <span class="hero-for-value">Веб-приложение (SaaS)</span>
+    </div>
+    <div class="hero-for-item">
+      <span class="hero-for-label">Для кого</span>
+      <span class="hero-for-value">Производители навесов</span>
+    </div>
+    <div class="hero-for-item">
+      <span class="hero-for-label">Аналогов</span>
+      <span class="hero-for-value">Нет с таким функционалом</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== ЭТАП 1 ========== -->
+<section>
+  <div class="stage s1">
+    <div class="stage-head">
+      <div class="stage-badge">Этап 1 &mdash; Основа</div>
+      <div class="stage-price-block">
+        <div class="stage-price">180 000 &#8381;</div>
+        <div class="stage-timeline">3-4 недели</div>
+      </div>
+    </div>
+
+    <h3>3D-визуализатор навесов</h3>
+    <p class="intro">Интерактивная 3D-модель, которая собирается в реальном времени из параметров, заданных пользователем. Не статичная картинка — а живой конструктор.</p>
+
+    <div class="feature-block">
+      <h4><span class="num">1</span> Выбор типа конструкции</h4>
+      <p>Пользователь выбирает один из 5 типов навесов. Каждый тип — отдельная 3D-модель с уникальной геометрией.</p>
+      <div class="detail">
+        <strong>5 типов:</strong><br>
+        &bull; Навес простой (карпорт) — открытый, на 1-3 авто<br>
+        &bull; Навес + хозблок — закрытая секция с дверью + открытый навес<br>
+        &bull; Пергола — металлический каркас + деревянные рейки вместо крыши<br>
+        &bull; Навес-терраса — пристройка к дому с деревянным настилом<br>
+        &bull; Пристенный навес — крепится к стене, столбы только с одной стороны
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">2</span> Размеры в реальном времени</h4>
+      <p>Двигаешь слайдер — 3D-модель моментально меняет размеры. Столбы пересчитываются, крыша растягивается, стенки подгоняются.</p>
+      <div class="detail">
+        <strong>Что регулируется:</strong><br>
+        &bull; Длина навеса: от 3 до 20 метров<br>
+        &bull; Ширина навеса: от 3 до 12 метров<br>
+        &bull; Высота столбов: от 2 до 4 метров<br>
+        &bull; Высота парапета (фриза): от 30 до 100 см<br>
+        &bull; Ширина хозблока (если выбран): от 2 до 5 метров<br>
+        <br>
+        Количество столбов и ферм рассчитывается автоматически.
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">3</span> Выбор цветов</h4>
+      <p>Клиент подбирает цвет каркаса и кровли под свой дом. Выбрал — 3D-модель сразу перекрасилась.</p>
+      <div class="detail">
+        <strong>13 цветов RAL каркаса:</strong> Шоколадный (8017), Чёрный (9005), Серый (7040), Белый (9010), Золотистый, Серебряный, Слоновая кость, Жёлтый, Красный, Вишнёвый, Тёмно-коричневый, Зелёный, Синий<br><br>
+        <strong>12 цветов кровли:</strong> Бронза серый, Коричневый, Красный, Белый, Бирюзовый, Зелёный, Синий, Жёлтый, Янтарь, Изумрудный, Гранатовый и др.
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">4</span> Выбор материалов и отделки</h4>
+      <p>Главное отличие от конкурентов: не только металл и поликарбонат, а реалистичные текстуры дерева, камня, HPL-панелей.</p>
+      <div class="detail">
+        <strong>Материал кровли:</strong> профнастил, металлочерепица<br>
+        <strong>Подшивка потолка:</strong> профнастил, деревянные рейки, HPL-панели<br>
+        <strong>Декор фриза:</strong> профнастил, HPL (имитация дерева), каменная облицовка<br><br>
+        <strong>6 типов отделки стенок (для каждой стороны отдельно):</strong><br>
+        &bull; Без стенки (открытая сторона)<br>
+        &bull; Рольставни (закрываемые роллеты)<br>
+        &bull; Горизонтальные ламели — металл<br>
+        &bull; Горизонтальные ламели — дерево<br>
+        &bull; Вертикальные рейки<br>
+        &bull; Сплошная стенка (профнастил)
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">5</span> Размерные линии на 3D-модели</h4>
+      <p>Прямо на 3D-модели отображаются размеры в миллиметрах — как на профессиональном чертеже. Клиент видит реальные габариты.</p>
+      <div class="detail">
+        Длина, ширина, высота, высота парапета, ширина секций между столбами, ширина хозблока — всё подписано. Размерные линии со стрелками обновляются при каждом изменении параметра.
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">6</span> Вращение и ракурсы</h4>
+      <p>Мышкой или пальцем на телефоне можно крутить модель, приближать, рассматривать с любого угла.</p>
+      <div class="detail">
+        Предустановленные ракурсы: <strong>Перспектива</strong> (3/4 сверху), <strong>Фронт</strong>, <strong>Бок</strong>, <strong>Сверху</strong>. Работает на компьютере, планшете и телефоне.
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">7</span> Реалистичные материалы</h4>
+      <p>Не плоские цвета, а PBR-текстуры: металл блестит как металл, дерево выглядит как дерево, камень — как камень. Тени, отражения, нейтральный фон.</p>
+      <div class="detail">
+        Визуальный эталон — рендеры IRON CUBE. Нейтральная площадка, мягкое освещение, реалистичные материалы.
+      </div>
+    </div>
+
+    <div class="stage-value">
+      <h5>Ценность для бизнеса</h5>
+      <p>Показываете клиенту на встрече или отправляете ссылку — он сам крутит, выбирает, видит результат. Больше не нужно объяснять на пальцах или показывать чужие калькуляторы. <strong>Конверсия из переписки в заказ растёт, потому что клиент уже «примерил» навес.</strong></p>
+    </div>
+  </div>
+
+  <!-- ========== ЭТАП 2 ========== -->
+  <div class="stage s2">
+    <div class="stage-head">
+      <div class="stage-badge">Этап 2 &mdash; Автоматизация</div>
+      <div class="stage-price-block">
+        <div class="stage-price">100 000 &#8381;</div>
+        <div class="stage-timeline">2-3 недели</div>
+      </div>
+    </div>
+
+    <h3>Калькулятор + коммерческое предложение</h3>
+    <p class="intro">Прямо в том же приложении: автоматическая смета и PDF с коммерческим предложением одной кнопкой. Визуализатор становится инструментом продаж.</p>
+
+    <div class="feature-block">
+      <h4><span class="num">1</span> Автоматический расчёт сметы</h4>
+      <p>При каждом изменении параметров — стоимость пересчитывается мгновенно. 5 блоков сметы, как в реальном производстве.</p>
+      <div class="detail">
+        <strong>5 блоков сметы:</strong><br>
+        &bull; <strong>Материалы</strong> — столбы, профтрубы, фланцы, заглушки, саморезы, кровельный материал<br>
+        &bull; <strong>Расходные материалы</strong> — грунт-эмаль, электроды, пескобетон, сварочная смесь<br>
+        &bull; <strong>Производство</strong> — сварка, покраска, резка, гибка, сборка ферм<br>
+        &bull; <strong>Монтажные работы</strong> — монтаж навеса, столбов, аренда крана<br>
+        &bull; <strong>Доставка</strong><br><br>
+        Итого + стоимость за 1 м&sup2;. Каждый блок раскрывается с детализацией по позициям.
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">2</span> Расширенные параметры (для менеджера)</h4>
+      <p>Кнопка «Подробнее» раскрывает профессиональные параметры: профиль столбов, шаг ферм, тип покраски, монтаж.</p>
+      <div class="detail">
+        <strong>Столбы:</strong> профиль (80x80, 100x100, 120x120), шаг, глубина бетонирования, армирование<br>
+        <strong>Фермы:</strong> плоские/арочные, шаг, высота, выпуски<br>
+        <strong>Допы:</strong> тип покраски (грунт-эмаль / порошковая), монтаж (да/нет), доставка (по зонам)
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">3</span> Генерация КП в PDF</h4>
+      <p>Клиент нажимает «Скачать КП» — получает красивый PDF на 1-2 страницы.</p>
+      <div class="detail">
+        <strong>Содержание PDF:</strong><br>
+        &bull; Шапка с вашим логотипом и контактами<br>
+        &bull; 3D-изображение выбранной конфигурации (скриншот прямо из конфигуратора)<br>
+        &bull; Спецификация: тип, размеры, цвета, материалы<br>
+        &bull; Смета с разбивкой по 5 блокам<br>
+        &bull; Итоговая стоимость + цена за м&sup2;<br>
+        &bull; Контакты и реквизиты
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">4</span> Управление ценами без программиста</h4>
+      <p>Все коэффициенты и цены — в отдельном файле-конфигурации. Поменять цену на металл или стоимость монтажа — можно самостоятельно.</p>
+    </div>
+
+    <div class="stage-value">
+      <h5>Ценность для бизнеса</h5>
+      <p>Менеджер больше не тратит 30-60 минут на расчёт и оформление КП вручную. <strong>Клиент уходит с готовым предложением за 2 минуты.</strong> Каждый вечерний посетитель сайта может сам сгенерировать КП — без участия менеджера.</p>
+    </div>
+  </div>
+
+  <!-- ========== ЭТАП 3 ========== -->
+  <div class="stage s3">
+    <div class="stage-head">
+      <div class="stage-badge">Этап 3 &mdash; Проектирование</div>
+      <div class="stage-price-block">
+        <div class="stage-price">70 000 &#8381;</div>
+        <div class="stage-timeline">2-3 недели</div>
+      </div>
+    </div>
+
+    <h3>Автоматическая генерация чертежей</h3>
+    <p class="intro">Та же конфигурация — но теперь одной кнопкой получаете проектную документацию. Не ручная работа дизайнера, а параметрическая генерация.</p>
+
+    <div class="feature-block">
+      <h4><span class="num">1</span> Состав документации</h4>
+      <p>Стандартный комплект строительных чертежей, который сейчас стоит 10-15 тыс. за проект у стороннего специалиста.</p>
+      <div class="detail">
+        &bull; <strong>Аксонометрия</strong> — 3D-вид с размерами<br>
+        &bull; <strong>Фасад фронтальный</strong> — вид спереди с размерами<br>
+        &bull; <strong>Фасад боковой</strong> — вид сбоку с размерами<br>
+        &bull; <strong>Сечения</strong> — разрезы ферм, столбов, узлов<br>
+        &bull; <strong>План кровли</strong> — вид сверху<br>
+        &bull; <strong>Спецификация металла</strong> — автоматический подсчёт погонных метров каждого профиля
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <h4><span class="num">2</span> Экспорт</h4>
+      <p>PDF для клиента, SVG для дальнейшей работы в AutoCAD / CorelDRAW.</p>
+    </div>
+
+    <div class="stage-value">
+      <h5>Ценность для бизнеса</h5>
+      <p>Сейчас: 10-15 тыс. &#8381; за каждый проект чертежей + время ожидания. С конфигуратором: <strong>0 &#8381; и 10 секунд.</strong> При 20 проектах в год — экономия 200-300 тыс. &#8381; ежегодно. Этап окупается за 3-4 месяца.</p>
+    </div>
+  </div>
+
+  <!-- ========== PREMIUM: AI ВИЗУАЛИЗАЦИЯ ========== -->
+  <div class="premium-section premium">
+    <div class="premium-inner">
+      <div class="premium-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+        Этап 4 &mdash; AI-визуализация
+      </div>
+
+      <div class="premium-head">
+        <h3>AI-визуализация на местности</h3>
+        <div class="premium-price-block">
+          <div class="premium-price">120 000 &#8381;</div>
+          <div class="premium-timeline">3-4 недели</div>
+        </div>
+      </div>
+
+      <p class="premium-intro">Клиент фотографирует свой двор — а система показывает, как навес будет выглядеть именно у&nbsp;него. Фотореалистично, с&nbsp;правильными тенями, освещением и&nbsp;перспективой. Это уже не&nbsp;3D-конфигуратор&nbsp;&mdash; это&nbsp;AI&#8209;генерация.</p>
+
+      <div class="premium-optional">
+        &#9432;&ensp;<strong>Этот этап необязательный.</strong> Этапы 1-3 работают полностью самостоятельно. Этап 4&nbsp;&mdash; это дополнительная возможность, которую можно подключить в&nbsp;любой момент.
+      </div>
+
+      <div class="feature-block">
+        <h4><span class="num">1</span> Привязка к фото участка</h4>
+        <p>Клиент загружает фото своего двора, участка, фасада дома. AI анализирует перспективу, линию горизонта, направление света и глубину сцены &mdash; и вписывает навес прямо в фотографию.</p>
+        <div class="detail">
+          <strong>Что делает AI:</strong><br>
+          &bull; Определяет глубину сцены (что ближе, что дальше)<br>
+          &bull; Вычисляет перспективу (угол обзора, точки схода)<br>
+          &bull; Анализирует освещение (откуда свет, какие тени)<br>
+          &bull; Генерирует навес с учётом всех параметров из конфигуратора<br>
+          &bull; Накладывает реалистичные тени от навеса на существующую поверхность
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <h4><span class="num">2</span> Учёт параметров конфигуратора</h4>
+        <p>Навес на фото &mdash; не абстрактная картинка, а именно та конфигурация, которую клиент собрал: тот же тип, те же размеры, тот же цвет, те же материалы стенок.</p>
+        <div class="detail">
+          Выбрали навес 6&times;9 м с хозблоком, RAL 7024, горизонтальные ламели из дерева? Именно так он и появится на фото двора.
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <h4><span class="num">3</span> Тестирование на разных условиях</h4>
+        <p>AI обучается работать не с одной идеальной фотографией, а с реальными снимками в разных условиях. Это сложная задача &mdash; на это уходит основная часть разработки.</p>
+        <div class="detail">
+          <strong>Какие условия тестируются:</strong><br>
+          &bull; <strong>Время суток:</strong> яркий полдень, пасмурный день, золотой час (вечер), сумерки<br>
+          &bull; <strong>Сезон:</strong> лето (зелень), осень (жёлтая листва), зима (снег), весна (слякоть)<br>
+          &bull; <strong>Ракурсы:</strong> прямо, под углом, издалека, вблизи<br>
+          &bull; <strong>Типы участков:</strong> асфальт, брусчатка, газон, гравий, бетон<br>
+          &bull; <strong>Окружение:</strong> рядом с домом, отдельно стоящий, рядом с забором, на склоне<br><br>
+          На каждую комбинацию &mdash; отдельное тестирование и калибровка.
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <h4><span class="num">4</span> Интеграция в конфигуратор и КП</h4>
+        <p>AI-визуализация не живёт отдельно. Она встроена в тот же интерфейс и попадает в PDF-предложение.</p>
+        <div class="detail">
+          &bull; Кнопка «Загрузить фото участка» прямо в конфигураторе<br>
+          &bull; Результат генерации &mdash; в&nbsp;PDF вместе со сметой<br>
+          &bull; Можно сгенерировать 2-3 варианта с разных ракурсов<br>
+          &bull; Клиент скачивает изображения в высоком разрешении
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <h4><span class="num">5</span> Обучение на ваших навесах</h4>
+        <p>AI обучается именно на фотографиях ваших навесов &mdash; не абстрактных, а ваших реальных конструкций. Стиль, пропорции, детали &mdash; всё ваше.</p>
+        <div class="detail">
+          Используем ваши 19+ фотографий реальных объектов и рендеры IRON&nbsp;CUBE как визуальный эталон. AI&nbsp;генерирует навесы именно в&nbsp;вашем стиле, а&nbsp;не&nbsp;«какие-то навесы из&nbsp;интернета».
+        </div>
+      </div>
+
+      <!-- СТОИМОСТЬ ГЕНЕРАЦИЙ -->
+      <div class="premium-token-box">
+        <h5>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12"/></svg>
+          Стоимость использования (после разработки)
+        </h5>
+        <p style="font-size:14px;color:var(--gray-300);margin-bottom:16px;line-height:1.6;">
+          Этапы 1-3 работают <strong>бесплатно</strong> &mdash; без подписок, без лимитов, навсегда. А вот AI-визуализация использует нейросети, каждая генерация тратит вычислительные ресурсы:
+        </p>
+        <div class="token-grid">
+          <div class="token-item">
+            <div class="t-val">3-8 &#8381;</div>
+            <div class="t-label">за одно изображение</div>
+            <div class="t-cost">стоимость генерации</div>
+          </div>
+          <div class="token-item">
+            <div class="t-val">~500 &#8381;</div>
+            <div class="t-label">в месяц</div>
+            <div class="t-cost">при ~100 генерациях</div>
+          </div>
+          <div class="token-item">
+            <div class="t-val">~2 000 &#8381;</div>
+            <div class="t-label">в месяц</div>
+            <div class="t-cost">при ~500 генерациях</div>
+          </div>
+        </div>
+        <p class="token-note">Для сравнения: один навес стоит 200-500 тыс.&thinsp;&#8381;. Стоимость генерации &mdash; менее 0,01% от сделки.</p>
+      </div>
+
+      <!-- ТЕХНОЛОГИЧЕСКИЙ СТЕК -->
+      <div class="premium-stack">
+        <h5>Как это работает (технологии)</h5>
+        <p>
+          Depth Estimation (анализ глубины фото) &rarr; ControlNet + Stable Diffusion (генерация с контролем позиции) &rarr; Fine-tuning на ваших фотографиях (обучение стилю) &rarr; Композитинг (финальное наложение). Вычисления на облачных GPU-серверах &mdash; ничего не нужно устанавливать.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== ИТОГО ========== -->
+  <div class="total-box">
+    <div class="total-line">
+      <span class="tl">Этап 1: 3D-визуализатор</span>
+      <span class="tv">180 000 &#8381;</span>
+    </div>
+    <div class="total-line">
+      <span class="tl">Этап 2: Калькулятор + КП в PDF</span>
+      <span class="tv">100 000 &#8381;</span>
+    </div>
+    <div class="total-line">
+      <span class="tl">Этап 3: Генерация чертежей</span>
+      <span class="tv">70 000 &#8381;</span>
+    </div>
+    <div class="total-line sum">
+      <span class="tl">Этапы 1-3 (полный конфигуратор)</span>
+      <span class="tv">250 000 &#8381;</span>
+    </div>
+    <p class="total-note">Экономия 100 000 &#8381; при заказе всех трёх этапов сразу. Каждый этап можно заказать отдельно.</p>
+
+    <div style="height:1px;background:var(--border);margin:24px 0;"></div>
+
+    <div class="total-line" style="opacity:0.7;">
+      <span class="tl" style="display:flex;align-items:center;gap:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+        Этап 4: AI-визуализация на местности <span style="font-size:11px;color:var(--gray-600);">(опционально)</span>
+      </span>
+      <span class="tv" style="color:var(--purple);">120 000 &#8381;</span>
+    </div>
+    <div class="total-line sum" style="border-top-color:var(--purple-border) !important;">
+      <span class="tl">Полный пакет (все 4 этапа)</span>
+      <span class="tv" style="color:var(--purple);">350 000 &#8381;</span>
+    </div>
+    <p class="total-note">+ ~500-2 000 &#8381;/мес за AI-генерации (только Этап 4). Этапы 1-3 работают бесплатно навсегда.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== РЫНОК ========== -->
+<section>
+  <div class="label">Для справки</div>
+  <h2 class="stitle">Стоимость на рынке</h2>
+  <p class="sdesc">Аналогичные решения у студий и фрилансеров (данные 2025-2026).</p>
+
+  <table class="mtable">
+    <thead>
+      <tr>
+        <th>Кто</th>
+        <th>Что делает</th>
+        <th style="text-align:right">Цена</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Фриланс (Kwork)</td>
+        <td>Простой конфигуратор: 1 модель, крути-верти, смена цвета</td>
+        <td style="text-align:right">70 000 &#8381;</td>
+      </tr>
+      <tr>
+        <td>Веб-студия</td>
+        <td>3D-конфигуратор (если модели готовы)</td>
+        <td style="text-align:right">300 000 &#8381;</td>
+      </tr>
+      <tr>
+        <td>Веб-студия (полный цикл)</td>
+        <td>3D-конфигуратор с нуля + интерфейс + интеграция</td>
+        <td style="text-align:right">400-560 000 &#8381;</td>
+      </tr>
+      <tr class="hl">
+        <td><strong>Наше предложение</strong></td>
+        <td><strong>3D + калькулятор + смета + КП + чертежи</strong></td>
+        <td style="text-align:right"><strong>250 000 &#8381;</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="src">Источники: <a href="https://vc.ru/id5102463/2096701-tsena-vnedreniya-3d-konfiguratora-na-sayt">vc.ru</a>, <a href="https://kwork.ru/website-development/27275855/razrabotka-3d-konfiguratorov-s-nulya-i-pod-klyuch">Kwork</a></p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== ОКУПАЕМОСТЬ ========== -->
+<section>
+  <div class="label">Окупаемость</div>
+  <h2 class="stitle">Как быстро вернётся</h2>
+  <p class="sdesc"></p>
+
+  <div class="roi-grid">
+    <div class="roi-item">
+      <div class="big">200-300</div>
+      <div class="unit">тыс. &#8381; / год</div>
+      <div class="exp">Экономия на чертежах. Сейчас 10-15 тыс. за проект &times; 20 проектов/год</div>
+    </div>
+    <div class="roi-item">
+      <div class="big">2 мин</div>
+      <div class="unit">вместо 30-60 мин</div>
+      <div class="exp">Время на составление КП для одного клиента</div>
+    </div>
+    <div class="roi-item">
+      <div class="big">24/7</div>
+      <div class="unit">работает сам</div>
+      <div class="exp">Клиент считает в любое время. Менеджер не нужен на этапе оценки</div>
+    </div>
+    <div class="roi-item">
+      <div class="big">0 &#8381;</div>
+      <div class="unit">за конкурента</div>
+      <div class="exp">Больше не нужно показывать клиентам чужие калькуляторы (metallpr.ru)</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========== ПРОЦЕСС ========== -->
+<section>
+  <div class="label">Процесс работы</div>
+  <h2 class="stitle">Как это будет</h2>
+  <p class="sdesc"></p>
+
+  <div class="steps">
+    <div class="step-item">
+      <div class="step-n">1</div>
+      <div>
+        <h4>Согласование</h4>
+        <p>Утверждаем типы конструкций, цвета, материалы. Получаем прайс-лист для расчёта сметы.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">2</div>
+      <div>
+        <h4>Этап 1: 3D-визуализатор (3-4 недели)</h4>
+        <p>Создаём 3D-модели. Промежуточный результат — через 2 недели.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">3</div>
+      <div>
+        <h4>Этап 2: Калькулятор + КП (2-3 недели)</h4>
+        <p>Подключаем расчёт сметы и генерацию PDF.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">4</div>
+      <div>
+        <h4>Этап 3: Чертежи (2-3 недели)</h4>
+        <p>Добавляем генерацию проектной документации.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-n">5</div>
+      <div>
+        <h4>Сдача</h4>
+        <p>Разворачиваем на домене. Показываем как менять цены.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer class="footer">
+  <div class="footer-brand"><span>neovida</span>.ai</div>
+  <p>Март 2026</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -399,17 +399,87 @@
   .footer p { font-size: 12px; color: var(--gray-600); }
 
   @media (max-width: 700px) {
-    .hero h1 { font-size: 32px; }
-    .hero-for { flex-direction: column; gap: 16px; }
-    .stage-head { flex-direction: column; }
-    .roi-grid { grid-template-columns: 1fr; }
-    .stage { padding: 28px; }
+    .page { padding: 0 16px; }
+    .hero { padding: 60px 0 50px; }
+    .hero h1 { font-size: 28px; letter-spacing: -1px; }
+    .hero-sub { font-size: 16px; margin-bottom: 32px; }
+    .hero-for { flex-direction: column; gap: 14px; padding: 18px 20px; }
+
+    section { padding: 48px 0; }
+    .stitle { font-size: 24px; }
+    .sdesc { font-size: 14px; }
+
+    .stage { padding: 22px 18px; margin-bottom: 20px; }
+    .stage-head { flex-direction: column; gap: 12px; }
+    .stage h3 { font-size: 22px; }
+    .stage > .intro { font-size: 14px; }
     .stage-price { font-size: 28px; }
-    .total-line.sum .tv { font-size: 26px; }
-    .premium-inner { padding: 28px 22px; }
-    .premium-head { flex-direction: column; }
+    .stage-badge { font-size: 10px; }
+
+    .feature-block { padding: 20px 16px; }
+    .feature-block h4 { font-size: 14px; }
+    .feature-block p { font-size: 13px; margin-left: 0; }
+    .feature-block .detail { margin-left: 0; font-size: 12px; padding: 12px 14px; }
+    .feature-block h4 .num { width: 22px; height: 22px; font-size: 11px; border-radius: 6px; }
+
+    .stage-value { padding: 14px 16px; }
+    .stage-value p { font-size: 13px; }
+
+    /* Таблица рынка — карточки вместо таблицы */
+    .mtable, .mtable thead, .mtable tbody, .mtable th, .mtable td, .mtable tr {
+      display: block;
+    }
+    .mtable thead { display: none; }
+    .mtable tr {
+      padding: 16px;
+      margin-bottom: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .mtable td {
+      padding: 2px 0;
+      border-bottom: none;
+      text-align: left !important;
+    }
+    .mtable td:first-child { font-weight: 600; color: var(--white); font-size: 14px; margin-bottom: 4px; }
+    .mtable td:nth-child(2) { font-size: 13px; color: var(--gray-400); margin-bottom: 8px; }
+    .mtable td:last-child { font-size: 18px; font-weight: 700; color: var(--white); }
+    .mtable .hl td { background: transparent; }
+    .mtable .hl { background: rgba(224,116,97,0.06); border-color: rgba(224,116,97,0.2); }
+    .mtable .hl td:last-child { color: var(--accent); font-size: 20px; }
+
+    .roi-grid { grid-template-columns: 1fr; gap: 10px; }
+    .roi-item { padding: 18px; }
+    .roi-item .big { font-size: 24px; }
+
+    .total-box { padding: 24px 18px; }
+    .total-line { font-size: 13px; flex-wrap: wrap; gap: 4px; }
+    .total-line .tv { font-size: 15px; }
+    .total-line.sum .tl { font-size: 15px; }
+    .total-line.sum .tv { font-size: 24px; }
+    .total-note { font-size: 12px; }
+
+    .step-item { padding: 16px 18px; gap: 14px; }
+    .step-n { width: 28px; height: 28px; font-size: 12px; }
+    .step-item h4 { font-size: 13px; }
+    .step-item p { font-size: 12px; }
+
+    .premium-section { border-radius: 20px; }
+    .premium-inner { padding: 22px 18px; border-radius: 18px; }
+    .premium-head { flex-direction: column; gap: 12px; }
+    .premium-head h3 { font-size: 22px; }
     .premium-price { font-size: 28px; }
-    .token-grid { grid-template-columns: 1fr; }
+    .premium-intro { font-size: 14px; }
+    .premium-optional { font-size: 12px; padding: 10px 14px; }
+    .premium-token-box { padding: 18px 16px; }
+    .token-grid { grid-template-columns: 1fr; gap: 10px; }
+    .premium-stack { padding: 14px 16px; }
+    .premium-stack p { font-size: 12px; }
+
+    .from { font-size: 11px; margin-bottom: 28px; }
+    .label { font-size: 10px; }
+    .footer { padding: 40px 0; }
   }
 </style>
 </head>
